@@ -1,6 +1,6 @@
 {
   "name": "@mars-cli/core",
-  "version": "1.1.0-alpha.0",
+  "version": "1.0.0-alpha.0",
   "description": "mars-cli core",
   "author": "小权 <597141997@qq.com>",
   "homepage": "",
@@ -24,5 +24,6 @@
   },
   "dependencies": {
     "@mars-cli/utils": "^0.1.0-alpha.0"
-  }
+  },
+  "gitHead": "e687f380deac84d907f09c6eebf073686265191a"
 }
