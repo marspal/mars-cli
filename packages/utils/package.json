@@ -1,6 +1,6 @@
 {
   "name": "@mars-cli/utils",
-  "version": "0.0.1",
+  "version": "0.1.0-alpha.0",
   "description": "mars-cli utils",
   "keywords": [
     "工具函数"
