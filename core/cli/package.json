@@ -23,7 +23,12 @@
     "test": "echo \"Error: run tests from core\""
   },
   "dependencies": {
-    "@mars-cli/utils": "^0.1.0-alpha.0"
+    "@mars-cli/log": "file:../../utils/log",
+    "colors": "^1.4.0",
+    "import-local": "^3.0.2",
+    "npmlog": "^4.1.2",
+    "semver": "^7.3.5",
+    "yargs": "^17.0.1"
   },
   "gitHead": "e687f380deac84d907f09c6eebf073686265191a"
 }
