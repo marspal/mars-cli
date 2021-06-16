@@ -1,5 +1,5 @@
 {
-  "name": "@mars-cli/log",
+  "name": "get-npm-info",
   "version": "1.0.1-alpha.0",
   "description": "> TODO: description",
   "author": "小权 <597141997@qq.com>",
@@ -13,9 +13,6 @@
   "files": [
     "lib"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marspal/mars-cli.git"
@@ -25,9 +22,5 @@
   },
   "bugs": {
     "url": "https://github.com/marspal/mars-cli/issues"
-  },
-  "dependencies": {
-    "npmlog": "^4.1.2",
-    "path-exists": "^4.0.0"
   }
 }

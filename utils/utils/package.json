@@ -21,5 +21,8 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from utils\""
+  },
+  "dependencies": {
+    "path-exists": "^4.0.0"
   }
 }

@@ -24,6 +24,9 @@ function core() {
     }
 }
 
+// 检查当前版本是最新版本
+function checkoutGlobalUpdate(){}
+
 // 检查环境变量: 存放信息
 function checkEnv(){
     // dotenv
