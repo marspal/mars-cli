@@ -1,5 +1,5 @@
 {
-  "name": "get-npm-info",
+  "name": "@mars-cli/get-npm-info",
   "version": "1.0.1-alpha.0",
   "description": "> TODO: description",
   "author": "小权 <597141997@qq.com>",

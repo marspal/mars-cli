@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@mars-cli/log": "file:../../utils/log",
+    "@mars-cli/get-npm-info": "file:../../utils/",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",
     "import-local": "^3.0.2",

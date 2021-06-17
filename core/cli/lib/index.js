@@ -9,6 +9,7 @@ const pkg = require('../package.json');
 const log = require('@mars-cli/log');
 const constant = require('./const');
 
+
 let args, config, userHome;
 function core() {
     try {
@@ -17,15 +18,20 @@ function core() {
         // checkRoot();
         checkUserHome();
         checkInputArgs();
-        log.verbose('debug', 'test debug log');
         checkEnv();
+        checkoutGlobalUpdate();
     } catch(err){
         log.error(err.message);
     }
 }
 
 // 检查当前版本是最新版本
-function checkoutGlobalUpdate(){}
+function checkoutGlobalUpdate(){
+    // 1.获取当前的版本号和名称
+    const pkgName = pkg.name;
+    const pkgVersion = pkg.version;
+    // 2.根据pkgName获取cli包的类型
+}
 
 // 检查环境变量: 存放信息
 function checkEnv(){
