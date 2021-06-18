@@ -11,7 +11,7 @@ const constant = require('./const');
 
 
 let args, config, userHome;
-function core() {
+async function core() {
     try {
         checkPkgVersion();
         checkNodeVersion();
@@ -19,18 +19,25 @@ function core() {
         checkUserHome();
         checkInputArgs();
         checkEnv();
-        checkoutGlobalUpdate();
+        await checkoutGlobalUpdate();
     } catch(err){
-        log.error(err.message);
+        log.error(err.message, '==');
     }
 }
 
 // 检查当前版本是最新版本
-function checkoutGlobalUpdate(){
+async function checkoutGlobalUpdate(){
     // 1.获取当前的版本号和名称
-    const pkgName = pkg.name;
-    const pkgVersion = pkg.version;
+    const npmName = pkg.name;
+    const currentVersion = pkg.version;
     // 2.根据pkgName获取cli包的类型
+    const {getNpmSemverVersion} = require("@mars-cli/get-npm-info");
+    const lastVersion = await getNpmSemverVersion(currentVersion, npmName);
+    if(lastVersion && semver.gt(lastVersion, currentVersion)){
+        log.warn(colors.yellow(`请手动更新 ${npmName}, 当前版本：${currentVersion}, 最新版本：${lastVersion}
+            更新命令：npm install -g ${npmName}
+        `));
+    }
 }
 
 // 检查环境变量: 存放信息
