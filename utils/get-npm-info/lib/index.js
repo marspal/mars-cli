@@ -36,7 +36,6 @@ async function getNpmVersions(npmName, registry){
 
 // 获取满足条件的versions
 function getNpmSemverVersions(baseVesion, versions) {
-    versions = ['1.0.0', '0.1.0-alpha.0', '1.0.1']
     return versions
         .filter(version => semver.satisfies(version, `^${baseVesion}`))
         .sort((a,b) => semver.gt(b, a) ? 1 : -1);

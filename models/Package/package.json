@@ -1,0 +1,32 @@
+{
+  "name": "@mars-cli/package",
+  "version": "1.0.0",
+  "description": "mars-cli npm modules",
+  "author": "小权 <597141997@qq.com>",
+  "homepage": "https://github.com/marspal/mars-cli#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marspal/mars-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/marspal/mars-cli/issues"
+  },
+  "dependencies": {
+    "@mars-cli/utils": "file:../../utils/utils"
+  }
+}
