@@ -1,7 +1,7 @@
 {
-  "name": "@mars-cli/package",
+  "name": "@mars-cli/format-path",
   "version": "1.0.0",
-  "description": "mars-cli npm modules",
+  "description": "format path",
   "author": "小权 <597141997@qq.com>",
   "homepage": "https://github.com/marspal/mars-cli#readme",
   "license": "ISC",
@@ -25,12 +25,5 @@
   },
   "bugs": {
     "url": "https://github.com/marspal/mars-cli/issues"
-  },
-  "dependencies": {
-    "@mars-cli/format-path": "file:../../utils/format-path",
-    "@mars-cli/utils": "file:../../utils/utils",
-    "@nars-cli/get-npm-info": "file:../../utils/get-npm-info",
-    "npminstall": "^4.11.0",
-    "pkg-dir": "^5.0.0"
   }
 }

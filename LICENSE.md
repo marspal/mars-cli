@@ -5,3 +5,5 @@
 - npmlog
 - import-local
 - colors
+- pkg-dir
+- npminstall: 安装模块

@@ -23,7 +23,10 @@ async function core() {
         // 注册命令
         registerCommand();
     } catch(err){
-        log.error(err.message, '==');
+        log.error(err.message);
+        if (program.debug) {
+            console.error(err);
+        }
     }
 }
 

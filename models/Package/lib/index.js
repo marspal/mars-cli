@@ -1,5 +1,11 @@
 'use strict';
+const path = require('path');
+const pkgDir = require('pkg-dir').sync;
+const npminstall = require('npminstall');
 const {isObject} = require("@mars-cli/utils");
+const formatPath = require("@mars-cli/format-path");
+const {getDefaultRegistry} = require("@nars-cli/get-npm-info");
+
 class Package {
     constructor(options){
         if (!options) {
@@ -11,13 +17,12 @@ class Package {
         // 初始化参数
         // package的路径
         this.targetPath = options.targetPath;
-        // package的存储路径
-        this.storePath = options.storePath;
+        // 缓存package的存储路径
+        // this.storePath = options.storePath;
         // package的name
         this.packageName = options.packageName;
         // package的version
         this.packageVersion = options.packageVersion;
-        console.log('Package constructor');
     }
     
     // package是否存在 
@@ -27,7 +32,15 @@ class Package {
 
     // 安装package
     install(){
-
+        return npminstall({
+            root: this.targetPath,
+            storeDir: this.storeDir,
+            registry: getDefaultRegistry(),
+            pkgs: [{
+                name: this.packageName,
+                version: this.packageVersion
+            }]
+        });
     }
 
     // 更新package
@@ -37,9 +50,19 @@ class Package {
 
     // 获取入口文件路径
     getRootFilePath(){
-
+        // 1. 获取package.json 所在目录 - pkg-dir
+        const dir = pkgDir(this.targetPath);
+        if (dir) {
+            // 2. 读取package.json - require() js/json/node
+            const pkgFile = require(path.join(dir, 'package.json'));
+            // 3. main/lib - path
+            if (pkgFile && pkgFile.main) {
+                // 4. 路径兼容(macOs/windows)
+                return formatPath(path.resolve(dir, pkgFile.main));
+            }
+        }
+        return null;   
     }
-
 
 }
 

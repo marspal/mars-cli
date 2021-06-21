@@ -54,5 +54,6 @@ async function getNpmSemverVersion(baseVesion, npmName, registry){
 module.exports = {
     getNpmInfo,
     getNpmVersions,
-    getNpmSemverVersion
+    getNpmSemverVersion,
+    getDefaultRegistry
 };
