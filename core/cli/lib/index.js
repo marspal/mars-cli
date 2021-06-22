@@ -14,7 +14,7 @@ const constant = require('./const');
 
 
 
-let args, config, userHome;
+let args, userHome;
 let program = new Command();
 async function core() {
     try {
@@ -45,7 +45,6 @@ function registerCommand(){
             process.env.LOG_LEVEL = 'info';
         }
         log.level = process.env.LOG_LEVEL;
-        log.verbose('test');
     });
 
     program.on('option:targetPath', function(){

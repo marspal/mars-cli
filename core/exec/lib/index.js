@@ -3,16 +3,16 @@ const path = require("path");
 const Package = require("@mars-cli/package");
 const log = require('@mars-cli/log');
 const SETTINGS = {
-    init: '@mars-cli/init'
+    init: '@imooc-cli/init'
 };
 
 const CACHE_DIR = "dependencies";
 
 async function exec() {
     let targetPath = process.env.CLI_TARGET_PATH;
+    const homePath = process.env.CLI_HOME_PATH;
     let storeDir = '';
     let pkg;
-    const homePath = process.env.CLI_HOME_PATH;
     log.verbose('targetPath', targetPath);
     log.verbose('homePath', homePath);
 
@@ -34,8 +34,9 @@ async function exec() {
             packageVersion
         });
 
-        if(pkg.exists()){
+        if(await pkg.exists()){
             // 更新pkg
+            await pkg.update();
         } else {
             // 安装pkg
            await pkg.install();
