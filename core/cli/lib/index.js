@@ -7,7 +7,6 @@ const semver = require('semver');
 const colors = require('colors/safe');
 const pathExists = require('path-exists').sync;
 const log = require('@mars-cli/log');
-const init = require('@mars-cli/init');
 const exec = require('@mars-cli/exec');
 const pkg = require('../package.json');
 const constant = require('./const');
@@ -39,7 +38,7 @@ function registerCommand(){
         .option('-tp, --targetPath <targetPath>', '是否指定本地调试文件路径', '');
     
     program.on('option:debug', function(){
-        if(program.opts().debug){
+        if(program.debug){
             process.env.LOG_LEVEL = 'verbose';
         } else {
             process.env.LOG_LEVEL = 'info';
@@ -48,7 +47,7 @@ function registerCommand(){
     });
 
     program.on('option:targetPath', function(){
-        process.env.CLI_TARGET_PATH = program.opts().targetPath;
+        process.env.CLI_TARGET_PATH = program.targetPath;
     });
 
     program
@@ -73,7 +72,6 @@ function registerCommand(){
 
 async function prepare(){
     checkPkgVersion();
-    checkNodeVersion();
     // checkRoot();
     checkUserHome();
     // checkInputArgs();
@@ -157,16 +155,6 @@ function checkRoot() {
     // console.log(process.geteuid());
     const rootCheck = require('root-check');
     rootCheck();
-}
-
-// 检测node版本号
-function checkNodeVersion(){
-    const currentVersion = process.version;
-    const lowestVersion = constant.LOWEST_NODE_VERSION;
-    // 小于
-    if(!semver.gte(currentVersion, lowestVersion)){
-        throw new Error(colors.red(`mars-cli 需要安装 v${lowestVersion}以上版本的nodejs`));
-    }
 }
 
 // 检测version

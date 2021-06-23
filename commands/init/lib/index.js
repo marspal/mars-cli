@@ -1,7 +1,15 @@
 'use strict';
 
-module.exports = init;
+const Command = require("@mars-cli/command");
 
-function init(projectName, options, command) {
-    console.log('init', projectName, options, process.env.CLI_TARGET_PATH);
+class InitCommand extends Command {
+
 }
+
+
+function init(argv) {
+    return new InitCommand(argv);
+}
+
+module.exports = init;
+module.exports.InitCommand = InitCommand;

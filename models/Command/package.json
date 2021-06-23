@@ -1,8 +1,8 @@
 {
-  "name": "@mars-cli/init",
-  "version": "1.0.1-alpha.0",
+  "name": "@mars-cli/command",
+  "version": "1.0.0",
   "description": "> TODO: description",
-  "author": "小权 <597141997@qq.com>",
+  "author": "andyxu <andyxmq@126.com>",
   "homepage": "https://github.com/marspal/mars-cli#readme",
   "license": "ISC",
   "main": "lib/index.js",
@@ -14,7 +14,7 @@
     "lib"
   ],
   "publishConfig": {
-    "access": "public"
+    "registry": "http://registry.npm.baidu-int.com"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "url": "https://github.com/marspal/mars-cli/issues"
   },
   "dependencies": {
-    "@mars-cli/command": "../../models/Command"
+    "colors": "^1.4.0",
+    "semver": "^7.3.5"
   }
 }
