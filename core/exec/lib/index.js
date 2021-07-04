@@ -18,6 +18,7 @@ async function exec() {
 
     const cmdObj = arguments[arguments.length - 1];
     const cmdName = cmdObj.name();
+    // 每一个命令对一个npm包
     const packageName = SETTINGS[cmdName];
     const packageVersion = "latest";
 

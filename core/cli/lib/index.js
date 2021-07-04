@@ -1,5 +1,4 @@
 'use strict';
-module.exports = core;
 
 const path = require('path');
 const {Command} = require('commander');
@@ -10,8 +9,6 @@ const log = require('@mars-cli/log');
 const exec = require('@mars-cli/exec');
 const pkg = require('../package.json');
 const constant = require('./const');
-
-
 
 let args, userHome;
 let program = new Command();
@@ -109,13 +106,14 @@ function checkEnv(){
     log.verbose('环境变量', process.env.CLI_HOME_PATH);
 }
 
-function createDefaultConfig(){
+function createDefaultConfig() {
     const cliConfig = {
         home: userHome
     };
-    if(process.env.CLI_HOME){
+    if (process.env.CLI_HOME) {
         cliConfig['cliHome'] = path.join(userHome, process.env.CLI_HOME);
-    } else{
+    } else {
+        // /Users/andyxu/.mars-cli
         cliConfig['cliHome'] = path.join(userHome, constant.DEFAULT_CLI_HOME);
     }
     process.env.CLI_HOME_PATH = cliConfig.cliHome;
@@ -161,3 +159,5 @@ function checkRoot() {
 function checkPkgVersion(){
     log.notice('cli', pkg.version);
 }
+
+module.exports = core;
