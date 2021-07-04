@@ -27,6 +27,7 @@
     "url": "https://github.com/marspal/mars-cli/issues"
   },
   "dependencies": {
-    "@mars-cli/command": "../../models/Command"
+    "@mars-cli/command": "../../models/Command",
+    "@mars-cli/log": "../../utils/log"
   }
 }

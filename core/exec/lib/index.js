@@ -50,7 +50,12 @@ async function exec() {
     }
     const rootFile = pkg.getRootFilePath();
     if (rootFile) {
-        require(rootFile).call(null, Array.from(arguments));
+        try {
+            // 在当前子进程中调用
+            require(rootFile).call(null, Array.from(arguments));
+        } catch(err){
+            log.error(err.message);
+        }
     }
 
     // 1. targetPath -> modulePath
