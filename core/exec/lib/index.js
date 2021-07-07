@@ -1,5 +1,6 @@
 'use strict';
 const path = require("path");
+const cp = require("child_process");
 const Package = require("@mars-cli/package");
 const log = require('@mars-cli/log');
 const SETTINGS = {
@@ -53,7 +54,39 @@ async function exec() {
     if (rootFile) {
         try {
             // 在当前子进程中调用
-            require(rootFile).call(null, Array.from(arguments));
+            // require(rootFile).call(null, Array.from(arguments));
+            // 在Node子进程中调用
+            // 1. cp.fork 2. cp.swan
+            const args = Array.from(arguments);
+            const cmd = args[args.length - 1];
+            const o = Object.create(null);
+            Object.keys(cmd).forEach(key => {
+                if(cmd.hasOwnProperty(key) && !key.startsWith('_') && key !== 'parent'){
+                    o[key] = cmd[key];
+                }
+            });
+            args[args.length - 1] = o;
+            const code = `require('${rootFile}').call(null, ${JSON.stringify(args)});`;
+            // windows cp.spawn('cmd', ['/c', 'node', '-e', code],)
+            const child = spwan('node', ['-e', code], {
+                cwd: process.cwd(),
+                stdio: 'inherit'
+            });
+            child.on('error', (e) => {
+                console.log('asdas');
+                log.error(e.message);
+                process.exit(1); 
+            });
+            child.on('exit', (e) => {
+                log.verbose('命令执行成功:' + e);
+                process.exit(e);
+            })
+            // child.stdout.on('data', function(thunk){
+            //     console.log(thunk.toString());
+            // });
+            // child.stderr.on('data', function(thunk){
+            //     console.log(thunk.toString());
+            // });
         } catch(err){
             log.error(err.message);
         }
@@ -67,4 +100,13 @@ async function exec() {
     // 封装 -> 复用
 }
 
+
+function spwan(command, args, options) {
+    const  win32 = process.platform === 'win32';
+    
+    const cmd = win32 ? 'cmd' : command;
+    const cmdArgs = win32 ? ['/c'].concat(command, args) : args;
+    
+    return cp.spawn(cmd, cmdArgs, options || {});
+}
 module.exports = exec;
