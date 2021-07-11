@@ -28,6 +28,9 @@
   },
   "dependencies": {
     "@mars-cli/command": "../../models/Command",
-    "@mars-cli/log": "../../utils/log"
+    "@mars-cli/log": "../../utils/log",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.1.1",
+    "semver": "^7.3.5"
   }
 }
