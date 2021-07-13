@@ -73,7 +73,6 @@ async function exec() {
                 stdio: 'inherit'
             });
             child.on('error', (e) => {
-                console.log('asdas');
                 log.error(e.message);
                 process.exit(1); 
             });

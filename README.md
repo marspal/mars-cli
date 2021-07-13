@@ -21,7 +21,7 @@ FE-架构师
 - mute-stream
 - rxjs
 - ansi-escapes
-
+- egg.js
 
 ### 使用方法
 使用: mars-cli init --debug --targetPath /Users/andyxu/webspace/mars-cli/commands/init project-Name --force
