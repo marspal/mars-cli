@@ -27,6 +27,7 @@
     "url": "https://github.com/marspal/mars-cli/issues"
   },
   "dependencies": {
+    "cli-spinner": "^0.2.10",
     "npmlog": "^4.1.2",
     "path-exists": "^4.0.0"
   }

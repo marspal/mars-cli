@@ -1,11 +1,8 @@
 {
-  "name": "@mars-cli/exec",
+  "name": "@mars-cli/request",
   "version": "1.0.0",
-  "description": "mars-cli execute",
-  "keywords": [
-    "package"
-  ],
-  "author": "小权 <597141997@qq.com>",
+  "description": "request",
+  "author": "andyxu <andyxmq@126.com>",
   "homepage": "https://github.com/marspal/mars-cli#readme",
   "license": "ISC",
   "main": "lib/index.js",
@@ -30,8 +27,7 @@
     "url": "https://github.com/marspal/mars-cli/issues"
   },
   "dependencies": {
-    "@mars-cli/log": "../../utils/log",
-    "@mars-cli/package": "../../models/Package",
+    "axios": "^0.21.1",
     "cli-spinner": "^0.2.10"
   }
 }

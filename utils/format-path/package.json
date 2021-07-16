@@ -25,5 +25,8 @@
   },
   "bugs": {
     "url": "https://github.com/marspal/mars-cli/issues"
+  },
+  "dependencies": {
+    "cli-spinner": "^0.2.10"
   }
 }

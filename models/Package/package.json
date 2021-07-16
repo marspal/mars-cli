@@ -30,6 +30,7 @@
     "@mars-cli/format-path": "file:../../utils/format-path",
     "@mars-cli/utils": "file:../../utils/utils",
     "@nars-cli/get-npm-info": "file:../../utils/get-npm-info",
+    "cli-spinner": "^0.2.10",
     "fs-extra": "^10.0.0",
     "npminstall": "^4.11.0",
     "path-exists": "^4.0.0",

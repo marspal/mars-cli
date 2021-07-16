@@ -7,6 +7,9 @@ const fse = require('fs-extra');
 const semver = require('semver');
 const Command = require("@mars-cli/command");
 const log = require("@mars-cli/log");
+const getProjectTemplate = require("./getProjectTemplate");
+const Package = require('@mars-cli/package');
+const {sleep, spinnerStart} = require('@mars-cli/utils');
 
 const TYPE_PROJECT = "project";
 const TYPE_COMPONENT = "component";
@@ -24,8 +27,9 @@ class InitCommand extends Command {
             const projectInfo = await this.prepare();
             if (projectInfo) {
                 log.verbose('projectInfo: ', projectInfo);
+                this.projectInfo = projectInfo;
                 // 2. 下载模板
-                this.downloadTemplate()
+                await this.downloadTemplate()
             }
             
             // 3. 安装模板
@@ -34,15 +38,57 @@ class InitCommand extends Command {
         }  
     }
 
-    downloadTemplate() {
+    async downloadTemplate() {
         // 1. 通过项目模板API获取项目模板信息
         // 1.1 egg.js搭建一套后端管理系统
-        // 1.2 npm 存储项目模板
+        // 1.2 npm 存储项目模板(vue-cli/vue-element-admin)
         // 1.3 将项目模板信息存储到mongoDB中
         // 1.4 通过egg.js获取mongodb 数据并且通过API返回
+
+        const {projectTemplate} = this.projectInfo;
+        const templateInfo = this.template.find(item => item.npmName === projectTemplate);
+        const userHome = os.homedir();
+        const targetPath = path.resolve(userHome, '.mars-cli', 'template');
+        const storeDir = path.resolve(userHome, '.mars-cli', 'template', 'node_modules');
+        const {version, npmName} = templateInfo;
+        const npmPkg = new Package({
+            targetPath,
+            storeDir,
+            packageName: npmName,
+            packageVersion: version
+        });
+        if (! await npmPkg.exists()) {
+            const spinner = spinnerStart('正在下载模板...');
+            await sleep();
+            try {
+                await npmPkg.install();
+                log.success('模板下载成功');
+            } catch (err) {
+                throw err;
+            } finally {
+                spinner.stop(true);
+            }  
+        } else {
+            const spinner = spinnerStart('正在更新模板...');
+            await sleep();
+            try {
+                await npmPkg.update();
+                log.success('模板更新成功');
+            } catch (err) {
+                throw err;
+            } finally {
+                spinner.stop(true);
+            }
+        }
     }
 
     async prepare(){
+        // 0. 判断项目模板是否存在
+        const template = await getProjectTemplate();
+        if (!template || template.length === 0) {
+            throw new Error('项目模板不存在');
+        }
+        this.template = template;
         const localPath = process.cwd();
         // 1. 当前目录是否为空
         if(!this.isDirEmpty(localPath)) {
@@ -146,6 +192,11 @@ class InitCommand extends Command {
                         return v;
                     }
                 }
+            }, {
+                type: 'list',
+                name: 'projectTemplate',
+                message: '清选择项目模板',
+                choices: this.createProjectTemplateChoice()
             }]);
             projectInfo = {
                 type,
@@ -163,6 +214,13 @@ class InitCommand extends Command {
             !file.startsWith(".") && !['node_modules'].includes(file)
         ));
         return !fileList || fileList.length <= 0;
+    }
+
+    createProjectTemplateChoice() {
+        return this.template.map(item => ({
+            name: item.name,
+            value: item.npmName
+        }));
     }
 }
 

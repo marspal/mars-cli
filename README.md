@@ -22,7 +22,11 @@ FE-架构师
 - rxjs
 - ansi-escapes
 - egg.js
-
+- @pick/cli-log
+- vue-element-admin
+- vue-cli
+- user-home
+- cli-spanner
 ### 使用方法
 使用: mars-cli init --debug --targetPath /Users/andyxu/webspace/mars-cli/commands/init project-Name --force
 --targetPath /Users/andyxu/webspace/mars-cli/commands/init
