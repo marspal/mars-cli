@@ -1,11 +1,11 @@
 'use strict';
 const path = require("path");
-const cp = require("child_process");
 const Package = require("@mars-cli/package");
 const log = require('@mars-cli/log');
 const SETTINGS = {
     init: '@imooc-cli/init'
 };
+const {exec: spwan} = require('@mars-cli/utils');
 
 const CACHE_DIR = "dependencies";
 
@@ -99,13 +99,4 @@ async function exec() {
     // 封装 -> 复用
 }
 
-
-function spwan(command, args, options) {
-    const  win32 = process.platform === 'win32';
-    
-    const cmd = win32 ? 'cmd' : command;
-    const cmdArgs = win32 ? ['/c'].concat(command, args) : args;
-    
-    return cp.spawn(cmd, cmdArgs, options || {});
-}
 module.exports = exec;

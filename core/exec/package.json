@@ -32,6 +32,7 @@
   "dependencies": {
     "@mars-cli/log": "../../utils/log",
     "@mars-cli/package": "../../models/Package",
+    "@mars-cli/utils": "file:../../utils/utils",
     "cli-spinner": "^0.2.10"
   }
 }
