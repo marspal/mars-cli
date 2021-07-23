@@ -40,11 +40,13 @@ class InitCommand extends Command {
             }
         } catch (e) {
             log.error(e.message);
+            if (process.env.LOG_LEVEL === 'verbose') {
+                console.error(e);
+            }
         }  
     }
 
     async installTemplate() {
-        console.log(this.template);
         if (this.templateInfo) {
             if (!this.templateInfo.type) {
                 this.templateInfo.type = TEMPLATE_TYPE_NORMAL;
@@ -145,7 +147,30 @@ class InitCommand extends Command {
     }
 
     async installCustomTemplate() {
-        console.log('安装自定义模板');
+        // 查询自定义的入口文件
+        if (await this.templateNpm.exists()) {
+            const rootFile = this.templateNpm.getRootFilePath();
+            if (fs.existsSync(rootFile)) {
+                log.notice('开始执行自定义模板');
+                const templatePath = path.resolve(this.templateNpm.cacheFilePath, 'template');
+                console.log(this.projectInfo, 'this.projectInfo');
+                const options = {
+                    templateInfo:this.templateInfo,
+                    projectInfo: this.projectInfo,
+                    sourcePath: templatePath,
+                    targetPath: process.cwd()
+                };
+                const code = `require('${rootFile}')(${JSON.stringify(options)})`;
+                log.verbose('code', code);
+                await execAsync('node', ['-e', code], {
+                    stdio: 'inherit',
+                    cwd: process.cwd()
+                });
+                log.success('自定义模板安装成功');
+            } else {
+                throw new Error("自定义模板入口文件不存在!");
+            }
+        }
     }
 
     async downloadTemplate() {

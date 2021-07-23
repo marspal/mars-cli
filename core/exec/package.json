@@ -30,8 +30,8 @@
     "url": "https://github.com/marspal/mars-cli/issues"
   },
   "dependencies": {
-    "@mars-cli/log": "../../utils/log",
-    "@mars-cli/package": "../../models/Package",
+    "@mars-cli/log": "file:../../utils/log",
+    "@mars-cli/package": "file:../../models/Package",
     "@mars-cli/utils": "file:../../utils/utils",
     "cli-spinner": "^0.2.10"
   }

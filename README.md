@@ -3,7 +3,6 @@ FE-架构师
 
 ### 第一部分 工程化开发
 
-
 > 脚手架用到pkg
 - semver
 - npmlog
@@ -35,3 +34,15 @@ FE-架构师
 ### 使用方法
 使用: mars-cli init --debug --targetPath /Users/andyxu/webspace/mars-cli/commands/init project-Name --force
 --targetPath /Users/andyxu/webspace/mars-cli/commands/init
+
+### 发布
+
+lerna version 当前版本号
+lerna changed 自上一次版本号后 哪些版本进行了变更
+lerna diff commit之间的diff
+
+git remote add origin url
+git remote -v
+
+默认情况: 需要指定远程origin master
+git push origin master --set-upstream
